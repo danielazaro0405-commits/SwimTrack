@@ -1,0 +1,263 @@
+
+<div class="app">
+  <header class="topbar">
+    <a class="brand" href="#inicio">
+      <span class="brand-icon">🏊</span>
+      <span>Swim<span class="brand-accent">Track</span></span>
+    </a>
+    <span class="version">TU ESPACIO DE NATACIÓN</span>
+  </header>
+
+  <main>
+    <section class="hero" id="inicio">
+      <div class="hero-copy">
+        <span class="eyebrow">TU PROGRESO, EN DATOS</span>
+        <h1>Supera tus <span>marcas.</span></h1>
+        <p>Guarda tus tiempos, analiza tu evolución y prepárate para tu próxima competición.</p>
+      </div>
+      <div class="hero-icon" aria-hidden="true">〰</div>
+    </section>
+
+    <section class="stats-grid" aria-label="Resumen">
+      <article class="stat-card">
+        <span class="stat-label">MARCAS GUARDADAS</span>
+        <strong id="totalMarks">0</strong>
+        <span class="stat-foot">Tiempos registrados</span>
+      </article>
+      <article class="stat-card">
+        <span class="stat-label">PRUEBAS</span>
+        <strong id="totalEvents">0</strong>
+        <span class="stat-foot">Pruebas diferentes</span>
+      </article>
+      <article class="stat-card">
+        <span class="stat-label">RÉCORDS PERSONALES</span>
+        <strong id="totalRecords">0</strong>
+        <span class="stat-foot">Por prueba y piscina</span>
+      </article>
+    </section>
+
+    <section class="panel" id="addMark">
+      <div class="section-heading">
+        <div>
+          <span class="eyebrow">TU HISTORIAL</span>
+          <h2>Registrar una marca</h2>
+        </div>
+        <span class="heading-icon">＋</span>
+      </div>
+
+      <form id="markForm">
+        <div class="form-grid">
+          <label class="field">
+            <span>Prueba</span>
+            <select id="eventSelect" required>
+              <option value="50 m mariposa">50 m mariposa</option>
+              <option value="100 m mariposa">100 m mariposa</option>
+              <option value="50 m crol">50 m crol</option>
+              <option value="100 m crol">100 m crol</option>
+              <option value="200 m crol">200 m crol</option>
+              <option value="400 m crol">400 m crol</option>
+              <option value="800 m crol">800 m crol</option>
+              <option value="1500 m crol">1500 m crol</option>
+              <option value="50 m espalda">50 m espalda</option>
+              <option value="100 m espalda">100 m espalda</option>
+              <option value="200 m espalda">200 m espalda</option>
+              <option value="50 m braza">50 m braza</option>
+              <option value="100 m braza">100 m braza</option>
+              <option value="200 m braza">200 m braza</option>
+              <option value="200 m estilos">200 m estilos</option>
+              <option value="400 m estilos">400 m estilos</option>
+            </select>
+          </label>
+
+          <label class="field">
+            <span>Tiempo</span>
+            <input id="timeInput" type="text" placeholder="Ej. 32.85 o 1:12.40" maxlength="12" autocomplete="off" required>
+          </label>
+
+          <label class="field">
+            <span>Tipo de piscina</span>
+            <select id="poolSelect" required>
+              <option value="25 m">Piscina corta · 25 m</option>
+              <option value="50 m">Piscina larga · 50 m</option>
+            </select>
+          </label>
+
+          <label class="field">
+            <span>Tipo de sesión</span>
+            <select id="kindSelect" required>
+              <option value="Competición">Competición</option>
+              <option value="Entrenamiento">Entrenamiento</option>
+              <option value="Control">Control de tiempos</option>
+            </select>
+          </label>
+
+          <label class="field field-full">
+            <span>Fecha</span>
+            <input id="dateInput" type="date" required>
+          </label>
+        </div>
+
+        <button class="primary-button" type="submit">＋ Guardar marca</button>
+        <p id="markStatus" class="form-status" aria-live="polite"></p>
+      </form>
+    </section>
+
+    <section class="panel" id="savedSection">
+      <div class="section-heading">
+        <div>
+          <span class="eyebrow">TODOS TUS RESULTADOS</span>
+          <h2>Mis marcas</h2>
+        </div>
+        <span class="heading-icon">◷</span>
+      </div>
+      <div class="toolbar">
+        <label class="field compact-field">
+          <span>Filtrar por prueba</span>
+          <select id="filterEvent">
+            <option value="all">Todas las pruebas</option>
+          </select>
+        </label>
+      </div>
+      <div id="marksList" class="marks-list"></div>
+    </section>
+
+    <section class="panel" id="statisticsSection">
+      <div class="section-heading">
+        <div>
+          <span class="eyebrow">DATOS DE RENDIMIENTO</span>
+          <h2>Estadísticas avanzadas</h2>
+          <p class="section-description">Analiza tus récords y cómo evolucionan tus tiempos.</p>
+        </div>
+        <span class="heading-icon">▥</span>
+      </div>
+
+      <div class="stats-filters">
+        <label class="field">
+          <span>Estilo</span>
+          <select id="statsStyle">
+            <option value="all">Todos los estilos</option>
+            <option value="mariposa">Mariposa</option>
+            <option value="crol">Crol</option>
+            <option value="espalda">Espalda</option>
+            <option value="braza">Braza</option>
+            <option value="estilos">Estilos</option>
+          </select>
+        </label>
+
+        <label class="field">
+          <span>Piscina</span>
+          <select id="statsPool">
+            <option value="all">25 m y 50 m</option>
+            <option value="25 m">Piscina de 25 m</option>
+            <option value="50 m">Piscina de 50 m</option>
+          </select>
+        </label>
+
+        <label class="field">
+          <span>Prueba</span>
+          <select id="statsEvent">
+            <option value="all">Todas las pruebas</option>
+          </select>
+        </label>
+
+        <label class="field">
+          <span>Periodo</span>
+          <select id="statsPeriod">
+            <option value="all">Todo el historial</option>
+            <option value="30">Últimos 30 días</option>
+            <option value="90">Últimos 90 días</option>
+            <option value="365">Último año</option>
+          </select>
+        </label>
+      </div>
+
+      <div id="statsSummary" class="stats-summary"></div>
+
+      <div class="stats-subsection">
+        <h3>Récords personales</h3>
+        <p class="stats-help">Mejores tiempos por prueba y piscina.</p>
+        <div id="statsRecords" class="stats-records"></div>
+      </div>
+
+      <div class="stats-subsection">
+        <h3>Tu evolución</h3>
+        <p class="stats-help">Comparación entre tu primera y última marca del periodo.</p>
+        <div id="statsEvolution" class="stats-evolution"></div>
+      </div>
+
+      <div class="stats-subsection">
+        <h3>Evolución gráfica</h3>
+        <p class="stats-help">Selecciona una prueba y piscina para comparar tiempos equivalentes.</p>
+        <div id="statsChart" class="chart-area stats-chart">
+          <p class="empty-state">Guarda tus marcas para ver las gráficas.</p>
+        </div>
+      </div>
+
+      <p class="chart-note">Un porcentaje positivo indica que has reducido tu tiempo. Las pruebas y piscinas se comparan por separado.</p>
+    </section>
+
+    <section class="panel" id="chartSection">
+      <div class="section-heading">
+        <div>
+          <span class="eyebrow">ANÁLISIS DE RENDIMIENTO</span>
+          <h2>Mi evolución</h2>
+        </div>
+        <span class="heading-icon">↗</span>
+      </div>
+
+      <label class="field chart-select">
+        <span>Prueba que quieres analizar</span>
+        <select id="chartEvent">
+          <option value="">Guarda una marca para empezar</option>
+        </select>
+      </label>
+
+      <div class="chart-legend">
+        <span><i class="legend-dot short-dot"></i> Piscina de 25 m</span>
+        <span><i class="legend-dot long-dot"></i> Piscina de 50 m</span>
+      </div>
+
+      <div id="chartArea" class="chart-area">
+        <p class="empty-state">Cuando guardes tus tiempos, aquí podrás ver tu evolución.</p>
+      </div>
+
+      <p class="chart-note">Los tiempos más bajos son mejores. Cada punto representa una marca registrada.</p>
+    </section>
+
+    <section class="panel ai-panel" id="swimAi">
+      <div class="section-heading">
+        <div>
+          <span class="eyebrow">TU ENTRENADOR DIGITAL</span>
+          <h2><span class="ai-sparkle">✳</span> SwimAI</h2>
+          <p class="section-description">Tu asistente personal de natación.</p>
+        </div>
+        <span class="ai-status-dot" title="Asistente disponible"></span>
+      </div>
+
+      <div class="ai-topics">
+        <span>⏱ Análisis de tiempos</span>
+        <span>↔ Conversiones</span>
+        <span>🏊 Entrenamientos</span>
+      </div>
+
+      <div id="aiMessages" class="ai-messages" aria-live="polite">
+        <div class="ai-message assistant">¡Hola! Soy SwimAI. Puedo ayudarte con tus tiempos, conversiones aproximadas entre piscinas y dudas de entrenamiento. ¿Qué quieres consultar?</div>
+      </div>
+
+      <form id="aiForm" class="ai-form">
+        <input id="aiInput" type="text" placeholder="Pregúntame algo sobre natación..." maxlength="4000" autocomplete="off" required>
+        <button id="aiSend" class="primary-button" type="submit">Enviar ➤</button>
+      </form>
+
+      <p id="aiStatus" class="form-status" aria-live="polite"></p>
+      <p class="ai-disclaimer">Las conversiones son estimaciones, no marcas oficiales. Coordina tus cargas de entrenamiento con tu entrenador.</p>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <span>SwimTrack</span>
+    <span>Hecho para mejorar, marca a marca.</span>
+  </footer>
+</div>
+
+
